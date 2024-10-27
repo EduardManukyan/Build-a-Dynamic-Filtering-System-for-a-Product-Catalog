@@ -1,9 +1,10 @@
 import React from 'react';
+import ProductList from './components/product-list';
 
 function App() {
   return (
     <React.Suspense fallback={'Loading...'}>
-      <div>Initial page</div>
+      <ProductList />
     </React.Suspense>
   );
 }

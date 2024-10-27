@@ -1,5 +1,5 @@
 {
-  "posts": [
+  "products": [
     {
       "id": 1,
       "name": "Wireless Headphones",
@@ -24,7 +24,7 @@
       "category": "Footwear",
       "brand": "Brand C",
       "price": 59.99,
-      "rating": 4.2,
+      "rating": 3.9,
       "imageUrl": "https://example.com/images/shoes.jpg"
     },
     {
@@ -33,7 +33,7 @@
       "category": "Electronics",
       "brand": "Brand D",
       "price": 499.99,
-      "rating": 4.8,
+      "rating": 5,
       "imageUrl": "https://example.com/images/smartphone.jpg"
     },
     {
