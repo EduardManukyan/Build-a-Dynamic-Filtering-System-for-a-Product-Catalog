@@ -29,7 +29,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
   const handlePriceChange = (value: number[]) => {
     if (value.length === 2) {
-      setPriceRange([value[0], value[1]]); // Set only if value has exactly two elements
+      setPriceRange([value[0], value[1]]);
     }
   };
 
