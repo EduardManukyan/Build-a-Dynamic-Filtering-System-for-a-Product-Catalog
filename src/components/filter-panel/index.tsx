@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Select, Checkbox, Slider, Rate, Button } from 'antd';
+import { Select, Slider, Rate, Button } from 'antd';
+import CheckboxWithLabel from '../check-box-label';
 import './style.scss';
 
 const { Option } = Select;
@@ -77,11 +78,12 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
       </div>
 
       <div className='filter-group'>
-        <label>Brand</label>
+        <label className='title-checkbox'>Brand</label>
         <div className='checkbox-group'>
           {brands.map((brand) => (
-            <Checkbox
+            <CheckboxWithLabel
               key={brand}
+              label={brand}
               checked={selectedBrands.includes(brand)}
               onChange={(e) => {
                 setSelectedBrands((prev) =>
@@ -90,9 +92,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                     : prev.filter((b) => b !== brand),
                 );
               }}
-            >
-              {brand}
-            </Checkbox>
+            />
           ))}
         </div>
       </div>

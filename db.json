@@ -1,49 +1,187 @@
 {
   "products": [
-    {
-      "id": 1,
-      "name": "Wireless Headphones",
-      "category": "Electronics",
-      "brand": "Brand A",
-      "price": 99.99,
-      "rating": 4.5,
-      "imageUrl": "https://example.com/images/headphones.jpg"
-    },
-    {
-      "id": 2,
-      "name": "Bluetooth Speaker",
-      "category": "Electronics",
-      "brand": "Brand B",
-      "price": 49.99,
-      "rating": 4.0,
-      "imageUrl": "https://example.com/images/speaker.jpg"
-    },
-    {
-      "id": 3,
-      "name": "Running Shoes",
-      "category": "Footwear",
-      "brand": "Brand C",
-      "price": 59.99,
-      "rating": 3.9,
-      "imageUrl": "https://example.com/images/shoes.jpg"
-    },
-    {
-      "id": 4,
-      "name": "Smartphone",
-      "category": "Electronics",
-      "brand": "Brand D",
-      "price": 499.99,
-      "rating": 5,
-      "imageUrl": "https://example.com/images/smartphone.jpg"
-    },
-    {
-      "id": 5,
-      "name": "Leather Jacket",
-      "category": "Clothing",
-      "brand": "Brand E",
-      "price": 199.99,
-      "rating": 4.7,
-      "imageUrl": "https://example.com/images/jacket.jpg"
-    }
-  ]
+
+      {
+        "id": 1,
+        "name": "Wireless Headphones",
+        "category": "Electronics",
+        "brand": "Brand A",
+        "price": 99.99,
+        "rating": 4.5,
+        "imageUrl": "https://example.com/images/headphones.jpg"
+      },
+      {
+        "id": 2,
+        "name": "Bluetooth Speaker",
+        "category": "Electronics",
+        "brand": "Brand A",
+        "price": 49.99,
+        "rating": 4.0,
+        "imageUrl": "https://example.com/images/speaker.jpg"
+      },
+      {
+        "id": 3,
+        "name": "Running Shoes",
+        "category": "Footwear",
+        "brand": "Brand C",
+        "price": 59.99,
+        "rating": 3.9,
+        "imageUrl": "https://example.com/images/shoes.jpg"
+      },
+      {
+        "id": 4,
+        "name": "Smartphone",
+        "category": "Electronics",
+        "brand": "Brand D",
+        "price": 499.99,
+        "rating": 5,
+        "imageUrl": "https://example.com/images/smartphone.jpg"
+      },
+      {
+        "id": 5,
+        "name": "Leather Jacket",
+        "category": "Clothing",
+        "brand": "Brand A",
+        "price": 199.99,
+        "rating": 4.7,
+        "imageUrl": "https://example.com/images/jacket.jpg"
+      },
+      {
+        "id": 6,
+        "name": "Gaming Laptop",
+        "category": "Electronics",
+        "brand": "Brand B",
+        "price": 999.99,
+        "rating": 4.8,
+        "imageUrl": "https://example.com/images/laptop.jpg"
+      },
+      {
+        "id": 7,
+        "name": "Sneakers",
+        "category": "Footwear",
+        "brand": "Brand C",
+        "price": 79.99,
+        "rating": 4.3,
+        "imageUrl": "https://example.com/images/sneakers.jpg"
+      },
+      {
+        "id": 8,
+        "name": "Backpack",
+        "category": "Accessories",
+        "brand": "Brand D",
+        "price": 49.99,
+        "rating": 4.5,
+        "imageUrl": "https://example.com/images/backpack.jpg"
+      },
+      {
+        "id": 9,
+        "name": "Dress Shoes",
+        "category": "Footwear",
+        "brand": "Brand A",
+        "price": 120.00,
+        "rating": 4.4,
+        "imageUrl": "https://example.com/images/dress-shoes.jpg"
+      },
+      {
+        "id": 10,
+        "name": "Scarf",
+        "category": "Accessories",
+        "brand": "Brand B",
+        "price": 19.99,
+        "rating": 4.3,
+        "imageUrl": "https://example.com/images/scarf.jpg"
+      },
+      {
+        "id": 11,
+        "name": "Leather Boots",
+        "category": "Footwear",
+        "brand": "Brand C",
+        "price": 150.00,
+        "rating": 4.6,
+        "imageUrl": "https://example.com/images/leather-boots.jpg"
+      },
+      {
+        "id": 12,
+        "name": "Wireless Earbuds",
+        "category": "Electronics",
+        "brand": "Brand D",
+        "price": 89.99,
+        "rating": 4.6,
+        "imageUrl": "https://example.com/images/earbuds.jpg"
+      },
+      {
+        "id": 13,
+        "name": "Baseball Cap",
+        "category": "Accessories",
+        "brand": "Brand A",
+        "price": 15.99,
+        "rating": 4.2,
+        "imageUrl": "https://example.com/images/cap.jpg"
+      },
+      {
+        "id": 14,
+        "name": "Smartwatch",
+        "category": "Electronics",
+        "brand": "Brand B",
+        "price": 199.99,
+        "rating": 4.7,
+        "imageUrl": "https://example.com/images/smartwatch.jpg"
+      },
+      {
+        "id": 15,
+        "name": "Jeans",
+        "category": "Clothing",
+        "brand": "Brand C",
+        "price": 45.99,
+        "rating": 4.4,
+        "imageUrl": "https://example.com/images/jeans.jpg"
+      },
+      {
+        "id": 16,
+        "name": "Sunglasses",
+        "category": "Accessories",
+        "brand": "Brand D",
+        "price": 75.00,
+        "rating": 4.5,
+        "imageUrl": "https://example.com/images/sunglasses.jpg"
+      },
+      {
+        "id": 17,
+        "name": "T-Shirt",
+        "category": "Clothing",
+        "brand": "Brand A",
+        "price": 25.99,
+        "rating": 4.3,
+        "imageUrl": "https://example.com/images/tshirt.jpg"
+      },
+      {
+        "id": 18,
+        "name": "Jacket",
+        "category": "Clothing",
+        "brand": "Brand B",
+        "price": 89.99,
+        "rating": 4.5,
+        "imageUrl": "https://example.com/images/jacket.jpg"
+      },
+      {
+        "id": 19,
+        "name": "Running Hat",
+        "category": "Accessories",
+        "brand": "Brand C",
+        "price": 22.50,
+        "rating": 4.1,
+        "imageUrl": "https://example.com/images/running-hat.jpg"
+      },
+      {
+        "id": 20,
+        "name": "Tablet",
+        "category": "Electronics",
+        "brand": "Brand D",
+        "price": 299.99,
+        "rating": 4.5,
+        "imageUrl": "https://example.com/images/tablet.jpg"
+      }
+    ]
+
+
 }

@@ -1,13 +1,14 @@
 import { useState, useEffect, FC } from 'react';
-import { Input, Select, Card, Button, Spin } from 'antd';
+import { Button, Spin, Pagination } from 'antd';
 import LoadingSpinner from '../loading';
 import ErrorMessage from '../error-message';
-import './style.scss';
 import { useGetProductsQuery } from '../../store/products';
 import FilterPanel from '../filter-panel';
 import { useDebounce } from '../../hooks/redux';
-
-const { Option } = Select;
+import FilterControls from '../filter-panel/filter-control';
+import ProductGrid from '../filter-panel/product-grid';
+import { ITEM_PER_PAGE } from '../../constants';
+import './style.scss';
 
 interface Product {
   id: number;
@@ -36,9 +37,9 @@ const ProductList: FC = () => {
     rating: 0,
   });
   const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false); // Loading state for filter application
+  const [loading, setLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // Fetch all products from the API
   const {
     data: allProducts = [],
     error,
@@ -50,10 +51,8 @@ const ProductList: FC = () => {
   const [filteredProducts, setFilteredProducts] =
     useState<Product[]>(allProducts);
 
-  // Apply filters and search criteria to the full product list
   useEffect(() => {
-    setLoading(true); // Start loading spinner before applying filters
-
+    setLoading(true);
     const timeoutId = setTimeout(() => {
       const filtered = allProducts.filter((product) => {
         const matchesCategory =
@@ -78,19 +77,29 @@ const ProductList: FC = () => {
       });
 
       setFilteredProducts(filtered);
-      setLoading(false); // Stop loading spinner after 1 second
-    }, 1000); // Delay spinner for 1 second
+      setLoading(false);
+      setCurrentPage(1); // Reset to the first page after filtering
+    }, 1000);
 
-    return () => clearTimeout(timeoutId); // Cleanup timeout on unmount
+    return () => clearTimeout(timeoutId);
   }, [filters, debouncedSearchQuery, allProducts]);
 
-  // Handle applying filters
   const handleApplyFilters = (newFilters: Filters) => {
     setFilters(newFilters);
-    setIsFilterVisible(false); // Hide the filter panel on mobile after applying filters
+    setIsFilterVisible(false);
+    setCurrentPage(1); // Reset to the first page when filters are applied
   };
 
-  // Ensure the loading and error states are handled first
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const startIndex = (currentPage - 1) * ITEM_PER_PAGE;
+  const paginatedProducts = filteredProducts.slice(
+    startIndex,
+    startIndex + ITEM_PER_PAGE,
+  );
+
   if (isLoading) return <LoadingSpinner />;
   if (error) {
     return (
@@ -103,7 +112,6 @@ const ProductList: FC = () => {
 
   return (
     <div className='product-list-container'>
-      {/* Button to toggle filter panel visibility on mobile */}
       <Button
         className='toggle-filter-btn'
         onClick={() => setIsFilterVisible(!isFilterVisible)}
@@ -125,53 +133,25 @@ const ProductList: FC = () => {
         </div>
 
         <div className='product-content'>
-          <div className='controls'>
-            <Input
-              placeholder='Search products'
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className='search-input'
-            />
-            <Select
-              value={filters.category}
-              onChange={(value) => setFilters({ ...filters, category: value })}
-              className='category-select'
-            >
-              {/* Generate dropdown options from allProducts to ensure all categories are available */}
-              <Option value='All'>All</Option>
-              {Array.from(
-                new Set(allProducts.map((product) => product.category)),
-              ).map((cat) => (
-                <Option key={cat} value={cat}>
-                  {cat}
-                </Option>
-              ))}
-            </Select>
-          </div>
+          <FilterControls
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            filters={filters}
+            setFilters={setFilters}
+          />
 
-          {/* Wrap the product grid with the Spin component to show a loading spinner during filter application */}
           <Spin spinning={loading} tip='Applying filters...'>
-            {filteredProducts.length === 0 ? (
-              <div className='no-products-message'>
-                No products found matching your criteria.
-              </div>
-            ) : (
-              <div className='product-grid'>
-                {filteredProducts.map((product) => (
-                  <Card
-                    key={product.id}
-                    className='product-card'
-                    title={product.name}
-                  >
-                    <p>Category: {product.category}</p>
-                    <p>Brand: {product.brand}</p>
-                    <p>Price: ${product.price.toFixed(2)}</p>
-                    <p>Rating: {product.rating} stars</p>
-                  </Card>
-                ))}
-              </div>
-            )}
+            <ProductGrid products={paginatedProducts} />
           </Spin>
+
+          {/* Pagination Controls */}
+          <Pagination
+            current={currentPage}
+            pageSize={ITEM_PER_PAGE}
+            total={filteredProducts.length}
+            onChange={handlePageChange}
+            style={{ marginTop: '20px', textAlign: 'center' }}
+          />
         </div>
       </div>
     </div>
