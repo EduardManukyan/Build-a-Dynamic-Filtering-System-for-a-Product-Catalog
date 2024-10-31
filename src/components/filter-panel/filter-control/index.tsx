@@ -6,7 +6,7 @@ const { Option } = Select;
 interface Filters {
   category: string;
   brands: string[];
-  priceRange: [number, number];
+  priceRange: number[];
   rating: number;
 }
 
@@ -36,7 +36,6 @@ const FilterControls: FC<FilterControlsProps> = ({
       className='category-select'
     >
       <Option value='All'>All</Option>
-      {/* Categories would ideally be fetched from API */}
       <Option value='Electronics'>Electronics</Option>
       <Option value='Clothing'>Clothing</Option>
       <Option value='Footwear'>Footwear</Option>

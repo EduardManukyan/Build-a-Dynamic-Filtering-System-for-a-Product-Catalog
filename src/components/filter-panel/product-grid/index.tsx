@@ -8,7 +8,7 @@ interface Product {
   brand: string;
   price: number;
   rating: number;
-  imageUrl: string;
+  popularity: number;
 }
 
 interface ProductGridProps {
