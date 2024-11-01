@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Checkbox } from 'antd';
 import './style.scss';
 
@@ -8,7 +8,7 @@ interface CheckboxWithLabelProps {
   onChange: (e: any) => void;
 }
 
-const CheckboxWithLabel: React.FC<CheckboxWithLabelProps> = ({
+const CheckboxWithLabel: FC<CheckboxWithLabelProps> = ({
   label,
   checked,
   onChange,

@@ -1,23 +1,16 @@
 import { Input, Select } from 'antd';
 import { FC } from 'react';
-
+import { IFilters } from '../../types/types';
 const { Option } = Select;
 
-interface Filters {
-  category: string;
-  brands: string[];
-  priceRange: number[];
-  rating: number;
-}
-
-interface FilterControlsProps {
+interface IFilterControlsProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
-  filters: Filters;
-  setFilters: (filters: Filters) => void;
+  filters: IFilters;
+  setFilters: (filters: IFilters) => void;
 }
 
-const FilterControls: FC<FilterControlsProps> = ({
+const FilterControls: FC<IFilterControlsProps> = ({
   searchQuery,
   setSearchQuery,
   filters,

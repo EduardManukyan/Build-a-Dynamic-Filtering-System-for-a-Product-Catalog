@@ -1,49 +1,44 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, {
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Select, Slider, Rate, Button } from 'antd';
 import CheckboxWithLabel from '../check-box-label';
 import './style.scss';
-
-interface Filters {
-  category: string;
-  brands: string[];
-  priceRange: [number, number];
-  rating: number;
-}
-
-interface FilterPanelProps {
-  onApplyFilters: (filters: Filters) => void;
-  onSortChange: (sortType: string) => void;
-  brands: string[];
-  categories: string[];
-}
-
+import { IFilters } from '../types/types';
 const { Option } = Select;
 
-interface Filters {
-  category: string;
-  brands: string[];
-  priceRange: [number, number];
-  rating: number;
-}
-
 interface FilterPanelProps {
-  onApplyFilters: (filters: Filters) => void;
+  onApplyFilters: (filters: IFilters) => void;
   onSortChange: (sortType: string) => void;
   brands: string[];
   categories: string[];
+  initialFilters: IFilters;
 }
-
-const FilterPanel: React.FC<FilterPanelProps> = ({
+const FilterPanel: FC<FilterPanelProps> = ({
   onApplyFilters,
   onSortChange,
   brands,
   categories,
+  initialFilters,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
   const [rating, setRating] = useState<number>(0);
   const [sortType, setSortType] = useState<string>('none');
+
+  // Sync local state with initialFilters on component mount or when initialFilters changes
+  useEffect(() => {
+    setSelectedCategory(initialFilters.category);
+    setSelectedBrands(initialFilters.brands);
+    setPriceRange(initialFilters.priceRange);
+    setRating(initialFilters.rating);
+  }, [initialFilters]);
 
   const handleCategoryChange = useCallback((value: string) => {
     setSelectedCategory(value);
@@ -77,6 +72,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     setSelectedBrands([]);
     setPriceRange([0, 1000]);
     setRating(0);
+    localStorage.removeItem('productFilters');
     onApplyFilters({
       category: 'All',
       brands: [],
@@ -88,6 +84,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   const handleSortChange = useCallback(
     (value: string) => {
       setSortType(value);
+      localStorage.setItem('sortType', value);
       onSortChange(value);
     },
     [onSortChange],

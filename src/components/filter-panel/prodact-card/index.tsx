@@ -1,18 +1,9 @@
 import { Card } from 'antd';
 import { FC } from 'react';
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  brand: string;
-  price: number;
-  rating: number;
-  popularity: number;
-}
+import { IProduct } from '../../types/types';
 
 interface ProductCardProps {
-  product: Product;
+  product: IProduct;
 }
 
 const ProductCard: FC<ProductCardProps> = ({ product }) => (

@@ -1,14 +1,6 @@
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  brand: string;
-  price: number;
-  rating: number;
-  popularity: number;
-}
+import { IProduct } from '../components/types/types';
 
-export const applySorting = (products: Product[], sortType: string) => {
+export const applySorting = (products: IProduct[], sortType: string) => {
   switch (sortType) {
     case 'PriceLowToHigh':
       return [...products].sort((a, b) => a.price - b.price);

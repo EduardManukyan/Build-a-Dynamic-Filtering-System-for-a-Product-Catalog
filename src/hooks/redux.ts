@@ -1,22 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { applySorting } from './helpers';
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  brand: string;
-  price: number;
-  rating: number;
-  popularity: number;
-}
-
-interface Filters {
-  category: string;
-  brands: string[];
-  priceRange: number[];
-  rating: number;
-}
+import { IFilters, IProduct } from '../components/types/types';
 
 export function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -35,8 +19,8 @@ export function useDebounce<T>(value: T, delay: number): T {
 }
 
 export const useFilteredProducts = (
-  products: Product[],
-  filters: Filters,
+  products: IProduct[],
+  filters: IFilters,
   searchQuery: string,
   sortType: string,
 ) => {

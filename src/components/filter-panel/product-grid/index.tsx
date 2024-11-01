@@ -1,18 +1,9 @@
 import { FC } from 'react';
 import ProductCard from '../prodact-card';
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  brand: string;
-  price: number;
-  rating: number;
-  popularity: number;
-}
+import { IProduct } from '../../types/types';
 
 interface ProductGridProps {
-  products: Product[];
+  products: IProduct[];
 }
 
 const ProductGrid: FC<ProductGridProps> = ({ products }) =>

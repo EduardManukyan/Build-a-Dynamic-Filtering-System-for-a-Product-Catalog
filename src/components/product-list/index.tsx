@@ -1,4 +1,4 @@
-import { useState, FC, useMemo, useCallback, memo } from 'react';
+import { useState, FC, useMemo, useCallback, memo, useEffect } from 'react';
 import { Button, Spin, Pagination } from 'antd';
 import LoadingSpinner from '../loading';
 import ErrorMessage from '../error-message';
@@ -9,26 +9,22 @@ import FilterControls from '../filter-panel/filter-control';
 import ProductGrid from '../filter-panel/product-grid';
 import { ITEM_PER_PAGE } from '../../constants';
 import './style.scss';
-
-interface Filters {
-  category: string;
-  brands: string[];
-  priceRange: number[];
-  rating: number;
-}
+import { IFilters } from '../types/types';
 
 const ProductList: FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const debouncedSearchQuery = useDebounce(searchQuery, 300);
-  const [filters, setFilters] = useState<Filters>({
-    category: 'All',
-    brands: [],
-    priceRange: [0, 1000],
-    rating: 0,
+  const [filters, setFilters] = useState<IFilters>(() => {
+    const savedFilters = localStorage.getItem('productFilters');
+    return savedFilters
+      ? JSON.parse(savedFilters)
+      : { category: 'All', brands: [], priceRange: [0, 1000], rating: 0 };
+  });
+  const [sortType, setSortType] = useState<string>(() => {
+    return localStorage.getItem('sortType') || 'none';
   });
   const [isFilterVisible, setIsFilterVisible] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [sortType, setSortType] = useState<string>('none');
 
   const {
     data: allProducts = [],
@@ -50,7 +46,7 @@ const ProductList: FC = () => {
     return filteredProducts.slice(startIndex, startIndex + ITEM_PER_PAGE);
   }, [filteredProducts, currentPage]);
 
-  const handleApplyFilters = useCallback((newFilters: Filters) => {
+  const handleApplyFilters = useCallback((newFilters: IFilters) => {
     setFilters(newFilters);
     setIsFilterVisible(false);
     setCurrentPage(1);
@@ -59,6 +55,15 @@ const ProductList: FC = () => {
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
   }, []);
+
+  // Save filters and sortType to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('productFilters', JSON.stringify(filters));
+  }, [filters]);
+
+  useEffect(() => {
+    localStorage.setItem('sortType', sortType);
+  }, [sortType]);
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -87,6 +92,7 @@ const ProductList: FC = () => {
             brands={Array.from(new Set(allProducts.map((p) => p.brand)))}
             onApplyFilters={handleApplyFilters}
             onSortChange={setSortType}
+            initialFilters={filters} // Pass the filters to FilterPanel
           />
         </div>
 
