@@ -122,6 +122,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
       <div className='filter-group'>
         <label>Category</label>
         <Select
+          data-testid='category-select'
           value={selectedCategory}
           onChange={handleCategoryChange}
           style={{ width: '100%' }}
@@ -162,6 +163,7 @@ const FilterPanel: FC<FilterPanelProps> = ({
       <div className='filter-group'>
         <label>Sort By</label>
         <Select
+          data-testid='sort-select'
           value={sortType}
           onChange={handleSortChange}
           style={{ width: '100%' }}
